@@ -13,7 +13,8 @@ class NoteController extends Controller
     public function index()
     {
         //
-        return view('notes.index');
+        $notes = Note::query()->orderBy('created_at', 'desc')->get(); 
+        return view('notes.index', ['notes' => $notes]);
     }
 
     /**
@@ -31,7 +32,15 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         //
-        return view('notes.store');
+        $data = $request->validate([
+           'note' => ['required', 'string']
+        ]);
+
+        $data['user_id'] = 1;
+
+        $note = Note::create($data);
+        
+        return to_route('notes.show', $note)->with('message', 'Note create successfully');
     }
 
     /**
@@ -40,8 +49,8 @@ class NoteController extends Controller
     public function show($id)
     {
         //
-        
-        return view('notes.show');
+        $note = Note::find($id);
+        return view('notes.show', ['note' => $note]);
     }
 
     /**
@@ -50,7 +59,8 @@ class NoteController extends Controller
     public function edit($id)
     {
         //
-        return view('notes.edit');
+        $note = Note::find($id);
+        return view('notes.edit', ['note' => $note]);
     }
 
     /**
