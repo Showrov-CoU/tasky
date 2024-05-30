@@ -7,7 +7,7 @@
 
             <div class="note-buttons">
                 <a href="{{ route('notes.index') }}" class="note-edit-button">Cancel</a>
-                <button class="note-submit-button">Submit</button>
+                <button class="note-submit-button" style="font-family: 'Caveat', cursive; ">Submit</button>
             </div>
         </form>
     </div>

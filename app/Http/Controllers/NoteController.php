@@ -68,8 +68,19 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        return 'update';
+        
+        $data = $request->validate([
+           'note' => ['required', 'string']
+        ]);
+        // dump($data);
+
+        $note = Note::findOrFail($id);
+        // dump($note);
+
+        $note->update($data);
+        // dd($note);
+        
+        return to_route('notes.show', $note)->with('message', 'Note updated successfully');
     }
 
     /**
@@ -78,7 +89,13 @@ class NoteController extends Controller
     public function destroy($id)
     {
         //
-        return 'destroy';
+        //dump($id);
+       
+     
+        $note = Note::findOrFail($id);
+        $note->delete();
+
+        return to_route('notes.index')->with('message', 'Note deleted successfully');
         
     }
 }

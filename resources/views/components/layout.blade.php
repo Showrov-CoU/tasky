@@ -11,16 +11,22 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
-<body class="font-sans antialiased dark:bg-black dark:text-white/50">
+<body class="font-sans antialiased dark:bg-black dark:text-white/50" style="font-family: 'Caveat', cursive;">
+
     @session('message')
         <div class="success-message">
             {{ session('message') }}
         </div>
     @endsession
+    @include('components.navigation')
     {{ $slot }}
+
+    @yield('script')
+
 </body>
 
 </html>
