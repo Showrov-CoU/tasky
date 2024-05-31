@@ -1,4 +1,4 @@
-<nav>
+<nav class="note-container mt-4">
     <ul>
         <li><a href="{{ route('notes.index') }}" style="text-decoration:none; color:inherit; font-family:inherit">
                 Home</a> </li>

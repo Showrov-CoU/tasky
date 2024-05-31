@@ -1,14 +1,25 @@
 <x-layout>
     <div class="note-container single-note">
-        <h1>Create new note</h1>
-        <form action="{{ route('notes.store') }}" method="POST" class="note">
+        <h1 class="text-2xl font-bold">Create new note</h1>
+        <form enctype="multipart/form-data" action="{{ route('notes.store') }}" method="POST" class="space-y-5">
             @csrf
-            <textarea name="note" class="note-body" cols="30" rows="10" placeholder="Enter your note here"></textarea>
-
-            <div class="note-buttons">
-                <a href="{{ route('notes.index') }}" class="note-edit-button">Cancel</a>
-                <button class="note-submit-button" style="font-family: 'Caveat', cursive; ">Submit</button>
+            <div class="flex justify-start items-start gap-2">
+                <label for="note" class="pt-2 text-lg font-semibold">Note:</label>
+                <textarea class="p-2 border-2" name="note" class="note-body" cols="110" rows="5"
+                    placeholder="Type your note here....."></textarea>
             </div>
+
+            <div>
+                <label for="image" class="pt-2 text-lg font-semibold">Image:</label>
+                <input type="file" name="image" id="image">
+            </div>
+
+
+            <a href="{{ route('notes.index') }}"
+                class="note-edit-button px-5 py-2 text-white bg-[#006bd6] font-bold rounded-md text-base">Cancel</a>
+            <button class="note-submit-button px-5 py-2 text-white bg-[#a82f2f] font-bold rounded-md text-base"
+                style="font-family: 'Caveat', cursive; ">Submit</button>
+
         </form>
     </div>
 

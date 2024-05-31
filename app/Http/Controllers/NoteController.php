@@ -33,9 +33,16 @@ class NoteController extends Controller
     {
         //
         $data = $request->validate([
-           'note' => ['required', 'string']
+           'note' => ['required', 'string'],
+           'image' => ['required', 'image' , 'mimes:jpeg,png,jpg,gif'],
         ]);
 
+        $imageName = time().'.'.$request->image->extension();
+
+        $request->image->move(public_path('image'), $imageName);
+        // dd(public_path());
+
+        $data['image'] = $imageName;
         $data['user_id'] = 1;
 
         $note = Note::create($data);

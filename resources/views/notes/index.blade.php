@@ -3,10 +3,20 @@
         {{-- <a href="{{ route('notes.create') }}" class="new-note-btn">Create New Note</a> --}}
 
         <div class="notes">
+            {{-- @dd(public_path()) --}}
+
             @foreach ($notes as $note)
                 <div class="note">
+                    <div class="h-48">
+                        @if ($note->image)
+                            <img class="h-full" src="{{ asset('image/' . $note->image) }}" alt="note_img">
+                        @else
+                            <img class="h-full" src="{{ asset('image/ph.png') }}" alt="">
+                        @endif
+
+                    </div>
                     <div class="note-body">
-                        <p>{{ Str::limit($note->note, 60) }}</p>
+                        <p>{{ Str::limit($note->note, 20) }}</p>
                     </div>
                     <div class="note-buttons">
                         <a href="{{ route('notes.show', $note) }}" class="note-edit-button">View</a>
