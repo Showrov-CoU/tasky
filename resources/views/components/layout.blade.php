@@ -7,6 +7,9 @@
 
     <title>Laravel</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -26,6 +29,8 @@
     {{ $slot }}
 
     @yield('script')
+
+    <script src="https://kit.fontawesome.com/f631e8c7da.js" crossorigin="anonymous"></script>
 
 </body>
 

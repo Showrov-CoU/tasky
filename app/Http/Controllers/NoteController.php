@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use App\Models\NoteFile;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -31,13 +32,14 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
         $data = $request->validate([
            'note' => ['required', 'string'],
            'image' => ['required', 'image' , 'mimes:jpeg,png,jpg,gif'],
         ]);
 
         $imageName = time().'.'.$request->image->extension();
+       
 
         $request->image->move(public_path('image'), $imageName);
         // dd(public_path());
@@ -46,6 +48,20 @@ class NoteController extends Controller
         $data['user_id'] = 1;
 
         $note = Note::create($data);
+
+        if($request->hasFile('files')){
+            // dd($request->file('files'));
+            foreach($request->file('files') as $file){
+                $fileName = time().'.'.$file->getClientOriginalName();
+                $file->move(public_path('files'), $fileName);
+
+                NoteFile::create([
+                    'note_id' => $note->id,
+                    'file_path' => 'files/' . $fileName
+                ]);
+            }
+            
+        }
         
         return to_route('notes.show', $note)->with('message', 'Note create successfully');
     }
@@ -57,7 +73,8 @@ class NoteController extends Controller
     {
         //
         $note = Note::find($id);
-        return view('notes.show', ['note' => $note]);
+        $note_files = NoteFile::where('note_id', $id)->get();
+        return view('notes.show', ['note' => $note, 'note_files' => $note_files]);
     }
 
     /**
@@ -79,10 +96,11 @@ class NoteController extends Controller
         $data = $request->validate([
            'note' => ['required', 'string']
         ]);
-        // dump($data);
+      
+        dd($data);
 
         $note = Note::findOrFail($id);
-        // dump($note);
+        //dump($note);
 
         $note->update($data);
         // dd($note);
@@ -96,7 +114,7 @@ class NoteController extends Controller
     public function destroy($id)
     {
         //
-        //dump($id);
+        //dd($id);
        
      
         $note = Note::findOrFail($id);

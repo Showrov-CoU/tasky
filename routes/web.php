@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\welcomeController;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +20,5 @@ Route::get('/', [welcomeController::class, 'welcome'])->name('welcome');
 // Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('note.destroy');
   
 Route::resource('notes', NoteController::class);
+
+Route::delete('/file/delete/{id}', [FileController::class, 'destroy'])->name('file.delete');

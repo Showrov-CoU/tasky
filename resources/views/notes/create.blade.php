@@ -5,13 +5,17 @@
             @csrf
             <div class="flex justify-start items-start gap-2">
                 <label for="note" class="pt-2 text-lg font-semibold">Note:</label>
-                <textarea class="p-2 border-2" name="note" class="note-body" cols="110" rows="5"
+                <textarea class="p-2 border-2 text-black" name="note" class="note-body" cols="110" rows="5"
                     placeholder="Type your note here....."></textarea>
             </div>
 
             <div>
                 <label for="image" class="pt-2 text-lg font-semibold">Image:</label>
                 <input type="file" name="image" id="image">
+            </div>
+            <div>
+                <label for="image" class="pt-2 text-lg font-semibold">Files:</label>
+                <input type="file" name="files[]" id="file" multiple>
             </div>
 
 
