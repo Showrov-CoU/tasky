@@ -14,6 +14,7 @@ class NoteController extends Controller
     public function index()
     {
         //
+        //dump(auth()->user()->name);
         $notes = Note::latest()->paginate(3);
 
     

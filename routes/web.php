@@ -20,7 +20,7 @@ Route::group(['middleware' => 'guest'], function(){
    Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
    Route::get('/login', [AuthController::class, 'login'])->name('login');
    Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
-   Route::get('/logout', [AuthController::class, 'logOut'])->name('logOut');
+   //Route::get('/logout', [AuthController::class, 'logOut'])->name('logOut');
 });
 
 // Route::get('/notes', [NoteController::class, 'index'])->name('note');
@@ -31,6 +31,8 @@ Route::group(['middleware' => 'guest'], function(){
 // Route::put('/notes/{id}', [NoteController::class, 'update'])->name('note.update');
 // Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('note.destroy');
   
-Route::resource('notes', NoteController::class);
+Route::resource('notes', NoteController::class)->middleware('auth');
 
 Route::delete('/file/delete/{id}', [FileController::class, 'destroy'])->name('file.delete');
+
+Route::get('/logout', [AuthController::class, 'logOut'])->name('logOut');

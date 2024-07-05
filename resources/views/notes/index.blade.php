@@ -22,10 +22,16 @@
                         <a href="{{ route('notes.show', $note) }}" class="note-edit-button">View</a>
                         <a href="{{ route('notes.edit', $note) }}" class="note-submit-button">Edit</a>
 
-                        <button onclick="test({{ $note->id }})" class="note-delete-button"
-                            style="font-family: 'Caveat', cursive; ">
-                            Delete
-                        </button>
+                        @if (auth()->user()->isAdmin)
+                            <button type="button" onclick="test({{ $note->id }})" class="note-delete-button"
+                                style="font-family: 'Caveat', cursive; ">
+                                Delete
+                            </button>
+                        @else
+                            <button class="note-delete-button opacity-30 cursor-none" disabled>delete</button>
+                        @endif
+
+
 
                         <form id='{{ 'deleteForm' . $note->id }}' action="{{ route('notes.destroy', $note->id) }}"
                             method="POST">

@@ -8,11 +8,15 @@
                 <h1>Note: {{ $note->created_at }}</h1>
                 <div class="note-buttons">
                     <a href="{{ route('notes.edit', $note) }}" class="note-edit-button">Edit</a>
-                    <form action="{{ route('notes.destroy', $note->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="note-delete-button">Delete</button>
-                    </form>
+                    @if (auth()->user()->isAdmin)
+                        <form action="{{ route('notes.destroy', $note->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="note-delete-button">Delete</button>
+                        </form>
+                    @else
+                        <button class="note-delete-button opacity-30 cursor-none" disabled>delete</button>
+                    @endif
                 </div>
             </div>
             <div>
@@ -37,9 +41,15 @@
                                 <form action="{{ route('file.delete', $file->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="">
-                                        <i class="fa-solid fa-trash text-red-500 hover:text-red-800"></i>
-                                    </button>
+                                    @if (auth()->user()->isAdmin)
+                                        <button class="">
+                                            <i class="fa-solid fa-trash text-red-500 hover:text-red-800"></i>
+                                        </button>
+                                    @else
+                                        <button disabled class="">
+                                            <i class="fa-solid fa-trash"></i>
+                                    @endif
+
                                 </form>
                             </li>
                         @endforeach
