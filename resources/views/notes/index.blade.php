@@ -1,10 +1,10 @@
-<x-layout>
+@extends('layout.auth')
+@section('slot')
     <div class="note-container py">
         {{-- <a href="{{ route('notes.create') }}" class="new-note-btn">Create New Note</a> --}}
 
         <div class="notes">
             {{-- @dd(public_path()) --}}
-
             @foreach ($notes as $note)
                 <div class="note">
                     <div class="h-48">
@@ -38,29 +38,32 @@
                 </div>
             @endforeach
         </div>
+
+        {{ $notes->onEachSide(5)->links() }}
+
     </div>
-    @section('script')
-        <script lang="JS">
-            function test(id) {
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById('deleteForm' + id).submit();
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
-                    }
-                });
-            }
-        </script>
-    @endsection
-</x-layout>
+@endsection
+@section('script')
+    <script lang="JS">
+        function test(id) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm' + id).submit();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+        }
+    </script>
+@endsection

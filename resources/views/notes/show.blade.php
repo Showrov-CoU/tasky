@@ -1,6 +1,6 @@
-<x-layout>
-
-    <div class="note-container single-note flex justify-start">
+@extends('layout.auth')
+@section('slot')
+    <div class="note-container single-note flex justify-start gap-3">
         <div class="w-[62%]">
             <div class="note-header">
                 {{-- @dump($note); --}}
@@ -22,7 +22,7 @@
                 <div class="note-body">{{ $note->note }}</div>
             </div>
         </div>
-        <div class="bg-white text-stone-950 w-[38%] p-2">
+        <div class="bg-[#e4d8d8] text-stone-950 w-[38%] p-2">
             <p class="font-bold text-2xl">Associated Files</p>
 
             <div class="mt-2">
@@ -51,4 +51,5 @@
 
         </div>
     </div>
-</x-layout>
+
+@endsection

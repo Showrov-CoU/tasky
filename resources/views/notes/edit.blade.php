@@ -1,4 +1,5 @@
-<x-layout>
+@extends('layout.auth')
+@section('slot')
     <div class="note-container single-note">
         <h1>Edit your note</h1>
         <form action="{{ route('notes.update', $note) }}" method="POST" class="note">
@@ -12,4 +13,4 @@
             </div>
         </form>
     </div>
-</x-layout>
+@endsection

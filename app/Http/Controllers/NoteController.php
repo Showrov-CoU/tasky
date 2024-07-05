@@ -14,7 +14,9 @@ class NoteController extends Controller
     public function index()
     {
         //
-        $notes = Note::query()->orderBy('created_at', 'desc')->get(); 
+        $notes = Note::latest()->paginate(3);
+
+    
         return view('notes.index', ['notes' => $notes]);
     }
 
@@ -36,7 +38,7 @@ class NoteController extends Controller
         $data = $request->validate([
            'note' => ['required', 'string'],
            'image' => ['required', 'image' , 'mimes:jpeg,png,jpg,gif'],
-        ]);
+        ],['image.required' => 'Please upload an image']);
 
         $imageName = time().'.'.$request->image->extension();
        

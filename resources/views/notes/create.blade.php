@@ -1,4 +1,5 @@
-<x-layout>
+@extends('layout.auth')
+@section('slot')
     <div class="note-container single-note">
         <h1 class="text-2xl font-bold">Create new note</h1>
         <form enctype="multipart/form-data" action="{{ route('notes.store') }}" method="POST" class="space-y-5">
@@ -12,6 +13,9 @@
             <div>
                 <label for="image" class="pt-2 text-lg font-semibold">Image:</label>
                 <input type="file" name="image" id="image">
+                @error('image')
+                    <p class="text-red-600"> {{ $errors->first('image') }} </p>
+                @enderror
             </div>
             <div>
                 <label for="image" class="pt-2 text-lg font-semibold">Files:</label>
@@ -26,5 +30,4 @@
 
         </form>
     </div>
-
-</x-layout>
+@endsection
